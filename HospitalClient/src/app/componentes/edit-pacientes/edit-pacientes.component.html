@@ -1,0 +1,31 @@
+<div>
+    <br>
+    <h2 class="text-center">{{config.modo}} paciente</h2>
+</div>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form [formGroup]="pacienteForm" (ngSubmit)="onSubmitFormulario()">
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input type="text" formControlName="apellidos" class="form-control">
+              <small class="form-text text-danger" style="color:red" *ngIf="!pacienteForm.controls['apellidos'].pristine && pacienteForm.controls['apellidos'].invalid  ">ingrese un valor válido.</small>
+              <label>Nombres</label>
+              <input type="text" formControlName="nombres"class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!pacienteForm.controls['nombres'].pristine && pacienteForm.controls['nombres'].invalid  ">ingrese un valor válido.</small>
+              <label>Numero de seguro social</label>
+              <input type="text" formControlName="idSeguridadSocial" class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!pacienteForm.controls['idSeguridadSocial'].pristine && pacienteForm.controls['idSeguridadSocial'].invalid  ">ingrese un valor válido.</small>             
+              <label>Código postal</label>
+              <input type="text" formControlName="codigoPostal"  class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!pacienteForm.controls['codigoPostal'].pristine && pacienteForm.controls['codigoPostal'].invalid  ">ingrese un valor válido.</small>
+              <label>Número de contacto</label>
+              <input type="text" formControlName="numeroContacto" class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!pacienteForm.controls['numeroContacto'].pristine && pacienteForm.controls['numeroContacto'].invalid  ">ingrese un valor válido.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-success" [disabled]="!pacienteForm.valid">Aceptar</button> &nbsp;
+            <button type="button" class="btn btn-primary" (click)="volverPacientes()">Volver</button>
+        </form>
+    </div>
+</div>
+
