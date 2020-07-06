@@ -39,11 +39,25 @@ namespace WebApiREST.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Doctor>> GetDoctores()
+        public ActionResult GetDoctores()
         {
 
             //Consulta todos los registros de la tabla
-            Doctor[] doctores = this.contexto.Doctores.ToArray();
+            var doctores = this.contexto.Doctores.Include(p => p.PacientesDoctores).Select(d => new { 
+                d.IdDoctor,
+                d.Nombres,
+                d.Apellidos,
+                d.Creado,
+                d.Credencial,
+                d.Especialidad,
+                d.Hospital,
+                PacientesDoctores = d.PacientesDoctores.Select(pd => new {
+                    pd.IdPaciente,
+                    pd.IdDoctor,
+                    pd.IdPacienteDoctor,
+                    pd.Paciente
+                })
+            }).ToArray();
 
             return Ok(doctores);
         }
@@ -54,7 +68,7 @@ namespace WebApiREST.Controllers
         /// <param name="idDoctor"></param>
         /// <returns></returns>
         [HttpGet("{idDoctor}")]
-        public ActionResult<Doctor> GetDoctor(int idDoctor)
+        public ActionResult GetDoctor(int idDoctor)
         {
 
             //Consulta el doctores

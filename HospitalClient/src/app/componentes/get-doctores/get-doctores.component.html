@@ -1,2 +1,38 @@
-<p>get-doctores works!</p>
+<br>
+<h2 class="text-center">Listado de doctores</h2>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <button type="button" (click)="onEdicion(0)" class="btn btn-success">Crear <i class="fa fa-plus"></i></button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Nombres</th> 
+                <th scope="col">Especialidad</th>
+                <th scope="col">Hospital</th>
+                <th scope="col"></th>   
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of doctores">        
+                <td>
+                    <button type="button" (click)="onEdicion(p.idDoctor)" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></button>
+                </td>
+                <td>{{p.apellidos}}</td>
+                <td>{{p.nombres}}</td>
+                <td>{{p.especialidad}}</td>
+                <td>{{p.hospital}}</td>
+                <td><button type="button" (click)="eliminarDoctor(p.idDoctor)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+              </tr>      
+            </tbody>
+          </table>
+    </div>
+</div>  
 <router-outlet></router-outlet>

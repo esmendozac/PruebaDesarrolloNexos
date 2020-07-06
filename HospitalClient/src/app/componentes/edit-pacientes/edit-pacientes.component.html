@@ -22,10 +22,31 @@
               <input type="text" formControlName="numeroContacto" class="form-control" >
               <small class="form-text text-danger" style="color:red" *ngIf="!pacienteForm.controls['numeroContacto'].pristine && pacienteForm.controls['numeroContacto'].invalid  ">ingrese un valor válido.</small>
             </div>
-            
             <button type="submit" class="btn btn-success" [disabled]="!pacienteForm.valid">Aceptar</button> &nbsp;
             <button type="button" class="btn btn-primary" (click)="volverPacientes()">Volver</button>
         </form>
+        <br>
+        <h4>Doctores disponibles</h4>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nombres</th> 
+                    <th scope="col">Especialidad</th>                       
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let d of doctores">        
+                    <td>
+                       <input type="checkbox" [(ngModel)]="d.seleccionado" (ngModelChange)="seleccionarDoctor(d)">
+                    </td>
+                    <td>{{d.apellidos}}</td>
+                    <td>{{d.nombres}}</td>
+                    <td>{{d.especialidad}}</td>                    
+                  </tr>      
+                </tbody>
+            </table>
     </div>
 </div>
 

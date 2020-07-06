@@ -47,6 +47,6 @@ export class GetPacientesComponent implements OnInit {
 
   //Redirige a las rutas seleccionadas 
   onEdicion(id : number) : void {
-    this.router.navigate(['pacientes/', id]);
+    this.router.navigate(['paciente/', id]);
   }
 }

@@ -1,0 +1,30 @@
+<div>
+    <br>
+    <h2 class="text-center">{{config.modo}} doctor</h2>
+</div>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form [formGroup]="doctorForm" (ngSubmit)="onSubmitFormulario()">
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input type="text" formControlName="apellidos" class="form-control">
+              <small class="form-text text-danger" style="color:red" *ngIf="!doctorForm.controls['apellidos'].pristine && doctorForm.controls['apellidos'].invalid  ">ingrese un valor válido.</small>
+              <label>Nombres</label>
+              <input type="text" formControlName="nombres"class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!doctorForm.controls['nombres'].pristine && doctorForm.controls['nombres'].invalid  ">ingrese un valor válido.</small>
+              <label>Especialidad</label>
+              <input type="text" formControlName="especialidad" class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!doctorForm.controls['especialidad'].pristine && doctorForm.controls['especialidad'].invalid  ">ingrese un valor válido.</small>             
+              <label>Credencial</label>
+              <input type="text" formControlName="credencial"  class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!doctorForm.controls['credencial'].pristine && doctorForm.controls['credencial'].invalid  ">ingrese un valor válido.</small>
+              <label>Hospital</label>
+              <input type="text" formControlName="hospital" class="form-control" >
+              <small class="form-text text-danger" style="color:red" *ngIf="!doctorForm.controls['hospital'].pristine && doctorForm.controls['hospital'].invalid  ">ingrese un valor válido.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-success" [disabled]="!doctorForm.valid">Aceptar</button> &nbsp;
+            <button type="button" class="btn btn-primary" (click)="volverDoctores()">Volver</button>
+        </form>
+    </div>
+</div>

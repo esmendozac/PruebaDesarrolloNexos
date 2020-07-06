@@ -1,3 +1,5 @@
+import {PacienteDoctor} from './PacienteDoctor';
+
 export class Doctor{
 
     idDoctor     : number;
@@ -7,5 +9,7 @@ export class Doctor{
     credencial   : string;
     hospital     : string;
     creado       : Date;         
-
+    pacientesDoctores : PacienteDoctor[];
+    //De interfaz 
+    seleccionado : boolean;
 }

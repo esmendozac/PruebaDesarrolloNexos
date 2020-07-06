@@ -39,11 +39,25 @@ namespace WebApiREST.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Paciente>> GetPacientes()
+        public ActionResult GetPacientes()
         {
 
-            //Consulta todos los registros de la tabla
-            Paciente[] pacientes = this.contexto.Pacientes.ToArray();
+            //Consulta todos los registros de la tabla y los proyecta 
+            var pacientes = this.contexto.Pacientes.Include(p => p.PacientesDoctores).Select(p => new {
+                    p.IdPaciente,
+                    p.Nombres,
+                    p.Apellidos,
+                    p.CodigoPostal,
+                    p.NumeroContacto,
+                    p.IdSeguridadSocial,
+                    p.Creado,
+                    PacientesDoctores = p.PacientesDoctores.Select(pd => new {
+                        pd.IdPaciente,
+                        pd.IdDoctor,
+                        pd.IdPacienteDoctor,
+                        pd.Doctor                        
+                    })
+            }).ToArray();
 
             return Ok(pacientes);
         }
@@ -54,11 +68,27 @@ namespace WebApiREST.Controllers
         /// <param name="idPaciente"></param>
         /// <returns></returns>
         [HttpGet("{idPaciente}")]
-        public ActionResult<Paciente> GetPaciente(int idPaciente)
+        public ActionResult GetPaciente(int idPaciente)
         {
 
-            //Consulta el pacientes
-            Paciente paciente = this.contexto.Pacientes.Find(idPaciente);
+            //Consulta el paciente y lo proyecta en un DTO dinámico
+            var paciente = this.contexto.Pacientes.Where(p => p.IdPaciente == idPaciente).Include(p => p.PacientesDoctores).Select(p => new
+            {
+                p.IdPaciente,
+                p.Nombres,
+                p.Apellidos,
+                p.CodigoPostal,
+                p.NumeroContacto,
+                p.IdSeguridadSocial,
+                p.Creado,
+                PacientesDoctores = p.PacientesDoctores.Select(pd => new
+                {
+                    pd.IdPaciente,
+                    pd.IdDoctor,
+                    pd.IdPacienteDoctor,
+                    pd.Doctor
+                })
+            }).ToArray().FirstOrDefault();
 
             if (paciente == null)
                 return NotFound($"No se hallaron registros para el id {idPaciente}");

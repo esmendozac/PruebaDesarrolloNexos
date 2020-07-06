@@ -1,3 +1,5 @@
+import {PacienteDoctor} from './PacienteDoctor';
+
 export class Paciente{
 
     idPaciente        : number;
@@ -6,5 +8,7 @@ export class Paciente{
     idSeguridadSocial : string;
     codigoPostal      : string;
     numeroContacto    : string;
-    creado            : Date;         
+    creado            : Date;
+    pacientesDoctores : PacienteDoctor[];   
+
 }
